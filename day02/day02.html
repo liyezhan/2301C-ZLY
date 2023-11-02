@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mybox{
+            width: 200px;
+            height: 200px;
+            background-color: #ccc;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="mybox" onclick="handleClick()" id="mybox"></div>
+</body>
+<script>
+    function changeColor(){
+        document.getElementById('mybox').style.backgroundColor='pink'
+    }
+
+    function handleClick(){
+        setTimeout(changeColor,2000)
+    }
+
+    const arr = [1,6,9,10,100,25];
+    const res = arr.filter(function(i){
+        if(i%2==0){
+            return true
+        }
+       
+    })
+    console.log(res);
+</script>
+</html>
