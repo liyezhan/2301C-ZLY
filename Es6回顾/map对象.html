@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let obj= {
+        name:'小赵',
+        title:'985'
+    }
+    const map = new Map([
+        ['name','小红'],
+        ['title','958'],
+        ['titles','958'],
+        ['titless','958'],
+    ])
+    map.set([45,645,564,546,],'dddd')
+    map.get('dddd');
+    map.has('title')
+    console.log(map.size);
+
+
+
+    const Array = [11,11,22,22,333,333,33,55,66]
+    let arraya =new Set([11,11,22,22,333,333,33,55,66])
+    console.log(arraya,'arrray');
+
+
+    function Point(x,y){
+        this.x = x
+        this.y = y
+    }
+    Point.prototype.toString = function(){
+        return '()'+ this.x + ',' + this.y + ')'
+    }
+    var p = new Point(1,2)
+    console.log(p);
+</script>
+</html>
