@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        box-sizing: border-box;
+
+    }
+
+    body {
+        width: 100%;
+        height: 100vh;
+        background-image: url('./背景.jpg');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    h1 {
+        text-align: center;
+        color: white;
+        margin-top: 30px;
+    }
+
+    p {
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        color: white;
+    }
+
+    .box {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 300px;
+    }
+
+    ul {
+        padding: 0 50px;
+        width: 800px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    ul li {
+        width: 100px;
+        margin-left: 15px;
+        margin-top: 30px;
+        text-align: center;
+        /* background: -webkit-linear-gradient(360deg, #2f1f64, #6ca69f); */
+        /* 标准的语法 */
+        -webkit-background-clip: text;
+
+        /* 设置背景裁剪到文字 */
+        -webkit-text-fill-color: transparent;
+        /* 将文字颜色设置为透明 */
+    }
+
+    ul li span {
+        color: #f00;
+    }
+
+    .right-box {
+        flex: 1;
+        display: flex;
+        padding: 100px;
+        align-items: center;
+    }
+
+    .animated-text {
+        /* color: white; */
+        display: flex;
+        justify-content: center;
+        font-size: 26px;
+        background-clip: text;
+        -webkit-background-clip: text;
+        /* 兼容WebKit浏览器 */
+        color: transparent;
+        /* 文字颜色设为透明 */
+        background-image: linear-gradient(to right, #ff00cc, #3333ff);
+    }
+
+    h3 {
+        background-clip: text;
+        -webkit-background-clip: text;
+        font-size: 34px;
+    }
+
+    .btn {
+        margin-left: 1000px;
+    }
+
+    button {
+        margin-right: 10px;
+        width: 80px;
+        height: 30px;
+        background-color: #87ba5a;
+        color: white;
+        border-radius: 30px;
+        border: none;
+    }
+
+    .animated-text {
+        animation: colorAnimation 5s infinite;
+    }
+
+    @keyframes colorAnimation {
+        0% {
+            color: rgb(188, 138, 146);
+        }
+        20%{
+            color: rgb(185, 77, 77);
+        }
+        30%{
+            color: rgb(219, 180, 107);
+        }
+        40%{
+            color: rgb(200, 200, 39);
+        }
+        50%{
+            color: rgb(143, 254, 143);
+        }
+        60%{
+            color: aqua;
+        }
+        70%{
+            color: rgb(73, 73, 201);
+        }
+        80%{
+            color: #d74abb;
+        }
+        90%{
+            color: rgb(216, 174, 118);
+        }
+        100%{
+            color: rgb(72, 160, 131);
+        }
+    }
+</style>
+
+<body>
+    <h1>H2301C点名表</h1>
+    <p id="time">时间: <span></span> </p>
+    <div class="box">
+        <ul>
+
+        </ul>
+        <div class="right-box">
+            <h5 class="animated-text">天选之人: </h5>&nbsp;&nbsp;
+            <h3 id="name"></h3>
+        </div>
+    </div>
+    <div class="btn">
+        <button onclick="Single()"><span id="lonely">单人点名</span></button>
+        <button onclick="rollCallTwoStudents()"><span id="rollCallTwoStudents">双人点名</span></button>
+        <button onclick="boy()"><span id="boy">男生点名</span></button>
+        <button onclick="girl()"><span id="girl">女生点名</span></button>
+    </div>
+
+</body>
+<script>
+    const students = ['赵中阳', '曹世豪', '展立业', '张志辉', '佘晗尊', '付少聪', '陈亚东', '赵晓宁', '冯兴微', '李媛媛', '张梦佳', '杨子乐', '张清莲', '王凯', '孙健', '韩锡金', '李炎沛', '李超凡', '曹浩然', '杨浩琪', '冯士靖', '张赛辉', '徐贺翔', '丁卓肖', '周天龙', '王婷婷', '刘博文', '余道林', '曹博文', '裴丽柯', '杨晓宇', '王志阳', '张秋景']
+    let timer, randomIndex, calledStudent
+    let bool = true
+    // 点名函数 双人点名
+    function rollCallTwoStudents() {
+        // 随机选择两个学生
+        if (bool) {
+            timer = setInterval(() => {
+                var randomNumber1 = Math.floor(Math.random() * students.length);
+                var randomNumber2 = Math.floor(Math.random() * students.length);
+                // 如果两个随机数相同，则重新生成随机数，直到不相同为止
+                while (randomNumber2 === randomNumber1) {
+                    randomNumber2 = Math.floor(Math.random() * students.length);
+                }
+                let name = document.getElementById('name')
+                name.innerHTML = students[randomNumber1] + ',' + students[randomNumber2];
+                name.style.backgroundImage = `linear-gradient(to right,rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}),rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}))`
+                name.style.color = 'transparent'
+                document.getElementById('lonely').innerHTML = '停止'
+                bool = false
+            }, 100)
+        } else {
+            clearInterval(timer)
+            calledStudent = students[randomIndex]
+            document.getElementById('lonely').innerHTML = '双人点名'
+            bool = true
+        }
+    }
+    // 页面渲染
+    var ul = document.querySelector('ul')
+    for (let i = 0; i < students.length; i++) {
+        var li = document.createElement('li')
+        li.innerHTML = students[i]
+        // const c = `rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)})`
+        li.style.backgroundImage = `linear-gradient(to right,rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}),rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}))`
+        li.style.color = 'transparent'
+        ul.appendChild(li)
+    }
+    // 每秒变一次颜色
+    var lis = document.querySelectorAll('li')
+    lis.forEach(item => {
+        setInterval(() => {
+            item.style.backgroundImage = `linear-gradient(to right,rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}),rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}))`
+            item.style.color = 'transparent'
+        }, 1000)
+    })
+    // 单人点名
+    // 声明定时器变量
+    function Single() {
+        if (bool) {
+            timer = setInterval(() => {
+                randomIndex = Math.floor(Math.random() * students.length)
+                calledStudent = students[randomIndex]
+                let name = document.getElementById('name')
+                name.innerHTML = calledStudent
+                name.style.backgroundImage = `linear-gradient(to right,rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}),rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}))`
+                name.style.color = 'transparent'
+                document.getElementById('lonely').innerHTML = '停止'
+                bool = false
+            }, 100)
+        } else {
+            clearInterval(timer)
+            calledStudent = students[randomIndex]
+            document.getElementById('lonely').innerHTML = '单人点名'
+            bool = true
+        }
+        /* var randomIndex = Math.floor(Math.random() * students.length)
+        var calledStudent = students[randomIndex]
+        document.g
+        
+        etElementById('name').innerHTML = calledStudent */
+    }
+    // 时间
+    function getCurrentTime() {
+        var today = new Date(); // 创建Date对象
+        var year = today.getFullYear();
+        // 获取当前的月份，注意月份是从0开始计数的，所以需要加1
+        var month = today.getMonth() + 1;
+        // 获取当前的日子
+        var day = today.getDate();
+        var hours = today.getHours(); // 获取小时
+        var minutes = today.getMinutes(); // 获取分钟
+        var seconds = today.getSeconds(); // 获取秒
+        // 格式化时间，保证显示的数字始终是两位数
+        hours = formatTime(hours);
+        minutes = formatTime(minutes);
+        seconds = formatTime(seconds);
+        // 将时间显示在页面上
+        document.querySelector('span').innerHTML = year + "-" + month + "-" + day + "&nbsp;" + "&nbsp;" + hours + ":" + minutes + ":" + seconds;
+        // 每秒钟调用一次函数，实现实时更新时间
+        setTimeout(function () {
+            getCurrentTime();
+
+        }, 1000);
+    }
+    // 格式化时间，将一位数转为两位数
+    function formatTime(time) {
+        if (time < 10) {
+            time = "0" + time;
+        }
+        return time;
+    }
+    // 调用函数，开始显示当前时间
+    getCurrentTime();
+    // 女生点名
+    const girls = ['冯兴微', '李媛媛', '张梦佳', '张清莲', '王婷婷', '裴丽柯', '张秋景']
+    function girl() {
+        if (bool) {
+            timer = setInterval(() => {
+                randomIndex = Math.floor(Math.random() * girls.length)
+                calledStudent = girls[randomIndex]
+                let name = document.getElementById('name')
+                name.innerHTML = calledStudent
+                name.style.backgroundImage = `linear-gradient(to right,rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}),rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}))`
+                name.style.color = 'transparent'
+                document.getElementById('girl').innerHTML = '停止'
+                bool = false
+            }, 100)
+        } else {
+            clearInterval(timer)
+            calledStudent = girls[randomIndex]
+            document.getElementById('girl').innerHTML = '女生点名'
+            bool = true
+        }
+        // var randomItem = Math.floor(Math.random() * girls.length)
+        // var girlsStudent = girls[randomItem]
+        // document.getElementById('name').innerHTML = girlsStudent
+    }
+    // 男生点名
+    const boys = ['赵中阳', '曹世豪', '展立业', '张志辉', '佘晗尊', '付少聪', '陈亚东', '赵晓宁', '杨子乐', '王凯', '孙健', '韩锡金', '李炎沛', '李超凡', '曹浩然', '杨浩琪', '冯士靖', '张赛辉', '徐贺翔', '丁卓肖', '周天龙', '刘博文', '余道林', '王志阳', '曹博文', '杨晓宇']
+    function boy() {
+        if (bool) {
+            timer = setInterval(() => {
+                randomIndex = Math.floor(Math.random() * boys.length)
+                calledStudent = boys[randomIndex]
+                let name = document.getElementById('name')
+                name.innerHTML = calledStudent
+                name.style.backgroundImage = `linear-gradient(to right,rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}),rgba(${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)},${Math.floor(Math.random() * (255 + 1) - 1)}))`
+                name.style.color = 'transparent'
+                document.getElementById('boy').innerHTML = '停止'
+                bool = false
+            }, 100)
+        } else {
+            clearInterval(timer)
+            calledStudent = boys[randomIndex]
+            document.getElementById('boy').innerHTML = '男生点名'
+            bool = true
+        }
+        // var randomItems = Math.floor(Math.random() * boys.length)
+        // var boysStudent = boys[randomItems]
+        // document.getElementById('name').innerHTML = boysStudent
+    }
+</script>
+
+</html>
